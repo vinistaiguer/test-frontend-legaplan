@@ -77,6 +77,10 @@ $breakpoints: (
     padding: 20px;
     color: $text-color;
 
+    @include respond-to('small') {
+        padding: 15px;
+    }
+
     @include respond-to('medium') {
         max-width: 80%;
     }
@@ -90,6 +94,11 @@ $breakpoints: (
         flex-direction: column;
         align-items: center;
         margin-bottom: 20px;
+
+        @include respond-to('small') {
+            flex-direction: column;
+            align-items: center;
+        }
 
         @include respond-to('medium') {
             flex-direction: row;
@@ -133,6 +142,7 @@ $breakpoints: (
                 font-size: 1.125rem;
                 font-weight: 500;
                 margin-bottom: 10px;
+                text-align: center;
 
                 @include respond-to('medium') {
                     font-size: 1.25rem;
@@ -147,6 +157,10 @@ $breakpoints: (
                 margin-bottom: 10px;
                 font-size: 0.9rem;
                 cursor: pointer;
+
+                @include respond-to('small') {
+                    font-size: 0.8rem;
+                }
 
                 @include respond-to('medium') {
                     font-size: 1rem;
@@ -225,7 +239,15 @@ $breakpoints: (
             background: linear-gradient(90deg, darken($add-task-gradient-start, 5%) 0%, darken($add-task-gradient-end, 5%) 68.65%);
         }
 
+        @include respond-to('small') {
+            font-size: 0.9rem;
+        }
+
         @include respond-to('medium') {
+            font-size: 1rem;
+        }
+
+        @include respond-to('large') {
             font-size: 1.125rem;
         }
     }
@@ -251,6 +273,18 @@ $breakpoints: (
         width: 90%;
         max-width: 400px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+        @include respond-to('small') {
+            width: 95%;
+        }
+
+        @include respond-to('medium') {
+            width: 90%;
+        }
+
+        @include respond-to('large') {
+            width: 400px; // ou ajuste conforme necessário
+        }
 
         h2 {
             font-size: 1.25rem;
@@ -311,15 +345,6 @@ $breakpoints: (
 
                     &:hover {
                         background: linear-gradient(90deg, darken($add-task-gradient-start, 5%) 0%, darken($add-task-gradient-end, 5%) 68.65%);
-                    }
-                }
-
-                &.delete-button {
-                    background-color: $delete-button-color;
-                    color: white;
-
-                    &:hover {
-                        background-color: $delete-button-hover-color;
                     }
                 }
             }

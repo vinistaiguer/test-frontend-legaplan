@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import LogoSvg from "@/app/components/logo-svg";
 import '@/app/style/task-manager.scss';
 import axios from 'axios';
@@ -12,34 +12,46 @@ interface Task {
   createdAt: Date;
 }
 
+interface Tooltip {
+  visible: boolean;
+  text: string;
+  x: number;
+  y: number;
+}
+
 export default function TaskManager() {
   const [tasks, setTasks] = useState<Task[]>([]);
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const response = await axios.get('http://localhost:3001/api/tasks');
-      setTasks(response.data);
-    };
-
-    fetchTasks();
-  }, []);
-
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
-
-  const [tooltip, setTooltip] = useState<{ visible: boolean; text: string; x: number; y: number }>({
+  const [tooltip, setTooltip] = useState<Tooltip>({
     visible: false,
     text: '',
     x: 0,
     y: 0,
   });
 
-  const toggleTask = (id: number) => {
-    setTasks(tasks.map(task => 
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const response = await axios.get('http://localhost:3001/api/tasks');
+      setTasks(response.data);
+    };
+    fetchTasks();
+  }, []);
+
+  const toggleTask = async (id: number) => {
+    const updatedTasks = tasks.map(task => 
       task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+    );
+
+    setTasks(updatedTasks);
+
+    // Atualiza o backend
+    const taskToUpdate = updatedTasks.find(task => task.id === id);
+    if (taskToUpdate) {
+      await axios.put(`http://localhost:3001/api/tasks/${id}`, taskToUpdate);
+    }
   };
 
   const openAddModal = () => {
@@ -79,7 +91,6 @@ export default function TaskManager() {
   const deleteTask = async () => {
     try {
       if (taskToDelete) {
-        console.log(`Deleting task with ID: ${taskToDelete.id}`);
         await axios.delete(`http://localhost:3001/api/tasks/${taskToDelete.id}`);
         setTasks(tasks.filter(task => task.id !== taskToDelete.id));
         closeDeleteModal();
@@ -111,7 +122,7 @@ export default function TaskManager() {
               key={task.id} 
               className="task"
               onMouseEnter={() => {
-                const tooltipText = `Criada em: ${task.createdAt.toLocaleString()}`;
+                const tooltipText = `Criada em: ${new Date(task.createdAt).toLocaleString()}`;
                 setTooltip({ visible: true, text: tooltipText, x: 0, y: 0 });
               }}
               onMouseMove={(e) => {
@@ -119,7 +130,7 @@ export default function TaskManager() {
                 const tooltipY = e.clientY + 10;
                 setTooltip(prevTooltip => ({ ...prevTooltip, x: tooltipX, y: tooltipY }));
               }}
-              onMouseLeave={() => setTooltip({ ...tooltip, visible: false })}
+              onMouseLeave={() => setTooltip(prev => ({ ...prev, visible: false }))}
             >
               <input 
                 type="checkbox" 

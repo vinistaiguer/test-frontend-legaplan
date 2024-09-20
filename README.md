@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+\# 🚀 Next.js Project Welcome to our project built with \*\*Next.js\*\*! This guide will walk you through how to run the development environment and start the server.
 
-## Getting Started
+\--- \## 📜 Scripts \###
+1\. `dev`
+\```bash npm run dev Description: Starts the Next.js development server.
 
-First, run the development server:
+What it does: Builds the application in development mode.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Starts a local server, usually accessible at http://localhost:3000.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Enables Hot Module Replacement (HMR), allowing changes to be reflected immediately in the browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2\. `start-server`
+\```bash
+npm run start-server
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Description:
+Starts a Node.js server that runs the src/server.js file.
+Why use it: This command is used to run the JSON Server, allowing you to simulate a RESTful API during development.
 
-## Learn More
+Benefits: Test application functionalities without a real backend.
 
-To learn more about Next.js, take a look at the following resources:
+Provide simulated data quickly and efficiently.
+The server.js file is configured to initialize the JSON Server, allowing your Next.js application to interact with it as if it were a real API.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📦 Installation
+To install the project dependencies, run: \```bash npm install 🚀 Usage After installing the dependencies, you can use the indicated commands to start development or the server: Development: npm run dev JSON Server: npm run start -server 🤝 Contribution Feel free to contribute! Send your suggestions or corrections via pull requests.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📄 License
+This project is licensed under an MIT license.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+\### Customization
+Feel free to adjust any section or add visual elements as you wish! If you need anything else, just let me know!
