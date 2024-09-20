@@ -1,0 +1,328 @@
+// Font Face Declarations
+@font-face {
+    font-family: 'InterTight';
+    src: url('/fonts/InterTight-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'InterTight';
+    src: url('/fonts/InterTight-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+// Variables
+$primary-color: #3498db;
+$secondary-color: #2980b9;
+$text-color: #333;
+$muted-color: #666;
+$border-color: #ccc;
+$completed-color: #999;
+$new-tag-color: #ff0000;
+$cancel-button-color: #e8f4fd;
+$cancel-button-text-color: #3498db;
+$delete-button-color: #eb5757;
+$delete-button-hover-color: #d64545;
+$trash-icon-color: #B0BBD1;
+$add-task-gradient-start: #0796D3;
+$add-task-gradient-end: #53C0F0;
+
+$font-family: 'InterTight', Arial, sans-serif;
+$base-font-size: 16px;
+
+$breakpoints: (
+    small: 576px,
+    medium: 768px,
+    large: 992px,
+    xlarge: 1200px
+);
+
+// Mixins
+@mixin respond-to($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        @media (min-width: map-get($breakpoints, $breakpoint)) {
+            @content;
+        }
+    } @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+            + "Available breakpoints are: #{map-keys($breakpoints)}.";
+    }
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin button-style {
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: $font-family;
+    font-weight: 500;
+}
+
+// Styles
+.task-manager {
+    font-family: $font-family;
+    font-size: $base-font-size;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    color: $text-color;
+
+    @include respond-to('medium') {
+        max-width: 80%;
+    }
+
+    @include respond-to('large') {
+        max-width: 800px;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+
+        @include respond-to('medium') {
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-weight: 500;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+
+            @include respond-to('medium') {
+                margin-bottom: 0;
+            }
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 10px;
+
+            @include respond-to('medium') {
+                font-size: 1.8rem;
+                margin-bottom: 0;
+            }
+        }
+
+        .date {
+            font-size: 0.875rem;
+            color: $muted-color;
+        }
+    }
+
+    main {
+        section {
+            margin-bottom: 30px;
+
+            h2 {
+                font-size: 1.125rem;
+                font-weight: 500;
+                margin-bottom: 10px;
+
+                @include respond-to('medium') {
+                    font-size: 1.25rem;
+                }
+            }
+
+            .task {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                border: 1px dashed $border-color;
+                margin-bottom: 10px;
+                font-size: 0.9rem;
+                cursor: pointer;
+
+                @include respond-to('medium') {
+                    font-size: 1rem;
+                }
+
+                input[type="checkbox"] {
+                    margin-right: 10px;
+                }
+
+                &.completed {
+                    text-decoration: line-through;
+                    color: $completed-color;
+                }
+
+                .new-tag {
+                    margin-left: 10px;
+                    background-color: $new-tag-color;
+                    color: white;
+                    padding: 2px 5px;
+                    border-radius: 3px;
+                    font-size: 0.75rem;
+                    font-weight: 500;
+                }
+
+                .delete-task {
+                    background: none;
+                    color: $trash-icon-color;
+                    border: none;
+                    cursor: pointer;
+                    padding: 5px;
+                    margin-left: auto;
+                    opacity: 0.5;
+                    transition: opacity 0.3s ease;
+
+                    &:hover {
+                        opacity: 1;
+                        cursor: pointer;
+                    }
+
+                    svg {
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+
+                // Tooltip styles
+                .tooltip {
+                    position: absolute;
+                    background-color: #333;
+                    color: #fff;
+                    padding: 5px 10px;
+                    border-radius: 4px;
+                    font-size: 12px;
+                    z-index: 1000;
+                    white-space: nowrap;
+                    visibility: hidden; // Hidden by default
+                    opacity: 0;
+                    transition: opacity 0.2s ease-in-out;
+                }
+
+                &:hover .tooltip {
+                    visibility: visible; // Show on hover
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .add-task {
+        @include button-style;
+        width: 100%;
+        font-size: 1rem;
+        background: linear-gradient(90deg, $add-task-gradient-start 0%, $add-task-gradient-end 68.65%);
+
+        &:hover {
+            background: linear-gradient(90deg, darken($add-task-gradient-start, 5%) 0%, darken($add-task-gradient-end, 5%) 68.65%);
+        }
+
+        @include respond-to('medium') {
+            font-size: 1.125rem;
+        }
+    }
+
+    // New styles for modal
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .modal-content {
+            margin-bottom: 20px;
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: 500;
+            }
+
+            input {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid $border-color;
+                border-radius: 4px;
+                font-size: 1rem;
+                font-family: $font-family;
+
+                &:focus {
+                    outline: none;
+                    border-color: $primary-color;
+                }
+            }
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+
+            button {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                font-size: 1rem;
+                font-family: $font-family;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &.cancel-button {
+                    background-color: $cancel-button-color;
+                    color: $cancel-button-text-color;
+
+                    &:hover {
+                        background-color: darken($cancel-button-color, 5%);
+                    }
+                }
+
+                &.add-button {
+                    @include button-style;
+                    background: linear-gradient(90deg, $add-task-gradient-start 0%, $add-task-gradient-end 68.65%);
+
+                    &:hover {
+                        background: linear-gradient(90deg, darken($add-task-gradient-start, 5%) 0%, darken($add-task-gradient-end, 5%) 68.65%);
+                    }
+                }
+
+                &.delete-button {
+                    background-color: $delete-button-color;
+                    color: white;
+
+                    &:hover {
+                        background-color: $delete-button-hover-color;
+                    }
+                }
+            }
+        }
+    }
+}
