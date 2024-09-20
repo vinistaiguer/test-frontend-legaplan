@@ -116,7 +116,7 @@ export default function TaskManager() {
       </header>
       <main>
         <section>
-          <h2>Suas tarefas de hoje</h2>
+          <h2 className="title-section">Suas tarefas de hoje</h2>
           {tasks.filter(task => !task.completed).map(task => (
             <div 
               key={task.id} 
@@ -156,7 +156,7 @@ export default function TaskManager() {
           ))}
         </section>
         <section>
-          <h2>Tarefas finalizadas</h2>
+          <h2 className="title-section">Tarefas finalizadas</h2>
           {tasks.filter(task => task.completed).map(task => (
             <div key={task.id} className="task completed">
               <input 
@@ -181,7 +181,9 @@ export default function TaskManager() {
             </div>
           ))}
         </section>
-        <button onClick={openAddModal} className="add-task">Adicionar nova tarefa</button>
+        <div className="add-task-container">
+            <button onClick={openAddModal} className="add-task">Adicionar nova tarefa</button>
+        </div>
       </main>
 
       {isAddModalOpen && (
