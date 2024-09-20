@@ -4,8 +4,37 @@ Welcome to our project built with **Next.js**! This guide will walk you through 
 
 ---
 
-## 📜 Scripts
+## 📦 Installation
+To install the project dependencies, run:
+```bash
+npm install
+```
 
-### 1. dev
+## 🚀 Usage
+After installing the dependencies, you can use the indicated commands to start development or the server:
+### 📜 Scripts
+
+### 1. Development:
 ```bash
 npm run dev
+```
+Description: Starts the Next.js development server.
+
+What it does:
+
+Builds the application in development mode.
+Starts a local server, usually accessible at http://localhost:3000.
+Enables Hot Module Replacement (HMR), allowing changes to be reflected immediately in the browser.
+
+### 2. JSON Server:
+```bash
+npm run start-server
+```
+Description: Starts a Node.js server that runs the src/server.js file.
+
+Why use it: This command is used to run the JSON Server, allowing you to simulate a RESTful API during development.
+
+Benefits:
+
+Test application functionalities without a real backend.
+Provide simulated data quickly and efficiently. The server.js file is configured to initialize the JSON Server, allowing your Next.js application to interact with it as if it were a real API.
