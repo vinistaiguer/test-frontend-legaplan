@@ -5,28 +5,28 @@
       "text": "Lavar as mãos",
       "completed": false,
       "isNew": true,
-      "createdAt": "2024-09-22T04:27:18.003Z"
+      "createdAt": "2024-09-22T17:25:56.288Z"
     },
     {
       "id": 2,
       "text": "Fazer um bolo",
       "completed": false,
       "isNew": true,
-      "createdAt": "2024-09-22T04:27:31.433Z"
+      "createdAt": "2024-09-22T17:26:11.841Z"
     },
     {
       "id": 3,
       "text": "Lavar a louça",
       "completed": false,
       "isNew": true,
-      "createdAt": "2024-09-22T04:27:41.004Z"
+      "createdAt": "2024-09-22T17:26:17.301Z"
     },
     {
       "id": 4,
       "text": "Levar o lixo para fora",
       "completed": true,
       "isNew": true,
-      "createdAt": "2024-09-22T04:27:49.650Z"
+      "createdAt": "2024-09-22T17:26:22.217Z"
     }
   ]
 }

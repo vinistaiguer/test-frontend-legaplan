@@ -1,3 +1,4 @@
+'use client'
 import '@/app/style/task-manager.scss';
 import React from 'react';
 
