@@ -151,7 +151,6 @@ $breakpoints: (
         border: 1px solid $border-color-card;
         border-radius: 16px;
         box-shadow: 0px 1px 2px 0px #1018280D;
-        opacity: 0px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -315,6 +314,8 @@ $breakpoints: (
     // New styles for modal
     .modal-overlay {
         position: fixed;
+        display: flex;
+        justify-content: center;
         top: 0;
         left: 0;
         right: 0;
