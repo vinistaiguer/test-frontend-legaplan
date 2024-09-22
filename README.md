@@ -30,7 +30,7 @@ Enables Hot Module Replacement (HMR), allowing changes to be reflected immediate
 
 ### 2. JSON Server:
 ```bash
-npm run start-server
+npm run start:server
 ```
 #### Description:
 

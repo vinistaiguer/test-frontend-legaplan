@@ -1,33 +1,29 @@
-// Font Face Declarations
-@font-face {
-    font-family: 'InterTight';
-    src: url('/fonts/InterTight-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
-@font-face {
-    font-family: 'InterTight';
-    src: url('/fonts/InterTight-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
 }
 
 // Variables
 $primary-color: #3498db;
 $secondary-color: #2980b9;
-$text-color: #333;
-$muted-color: #666;
-$border-color: #ccc;
-$completed-color: #999;
+$text-color: #000;
+$muted-color: #0000008A;
+$border-color: #D7DDE9;
+$border-color-card: #EAECF0;
+$completed-color: #0000008A;
+$text-color-title: #0000008A;
 $new-tag-color: #ff0000;
-$cancel-button-color: #e8f4fd;
-$cancel-button-text-color: #3498db;
+$cancel-button-color: #E7EEFB;
+$cancel-button-text-color: #000;
 $delete-button-color: #eb5757;
 $delete-button-hover-color: #d64545;
 $trash-icon-color: #B0BBD1;
 $add-task-gradient-start: #0796D3;
 $add-task-gradient-end: #53C0F0;
+$delete-task-gradient-start: #D30707;
+$delete-task-gradient-end: #F05353;
 
 $font-family: 'InterTight', Arial, sans-serif;
 $base-font-size: 16px;
@@ -62,7 +58,7 @@ $breakpoints: (
     color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: url('/image/Cursors.png') 10 10, auto;
     transition: background-color 0.3s ease;
     font-family: $font-family;
     font-weight: 500;
@@ -70,203 +66,246 @@ $breakpoints: (
 
 // Styles
 .task-manager {
-    font-family: $font-family;
-    font-size: $base-font-size;
-    max-width: 100dvw;
-    max-height: 100dv;
-    margin: 0 auto;
-    padding: 20px;
-    color: $text-color;
-
-    @include respond-to('small') {
-        padding: 15px;
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    scrollbar-width: none;
+    :-webkit-scrollbar {
+        display: none;
     }
-
-    @include respond-to('medium') {
-        max-width: 80%;
-    }
-
-    @include respond-to('large') {
-        max-width: 1000px;
-    }
-
     header {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
+        align-items: start;
+        margin-top: 24px;
+        width: 272px;
+        height: 90px;
+        border-bottom: 1px solid #D7DDE9;
+        padding-bottom: 24px;
 
-        @include respond-to('small') {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        @include respond-to('medium') {
+        @include respond-to('large') {
+            min-width: 1328px;
+            height: 60px;
+            display: flex;
             flex-direction: row;
+            align-items: center;
             justify-content: space-between;
-            margin-bottom: 40px;
         }
-
+        
         .logo {
-            font-weight: 500;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-
-            @include respond-to('medium') {
-                margin-bottom: 0;
+            transform: translateX(-14px);
+        
+            @include respond-to('large') {
+                transform: translateX(0px);
+                width: 150px;
+                height: auto;
+                left: 0px;
             }
         }
-
+        
         h1 {
-            font-size: 1.5rem;
+            font-family: Inter Tight, sans-serif;
+            font-size: 16px;
             font-weight: 500;
-            text-align: center;
-            margin-bottom: 10px;
-
-            @include respond-to('medium') {
-                font-size: 1.8rem;
-                margin-bottom: 0;
+            line-height: 19.36px;
+            letter-spacing: -0.02em;
+            text-align: left;
+        
+            @include respond-to('large') {
+                font-size: 24px;
+                flex-grow: 1;
+                text-align: center;
+                transform: translateX(36px);
             }
         }
-
+        
         .date {
-            font-size: 0.875rem;
+            font-family: Inter Tight, sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 19.36px;
+            letter-spacing: -0.02em;
+            text-align: left;
             color: $muted-color;
+        
+            @include respond-to('large') {
+                font-family: "Inter Tight", sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 19.36px;
+                letter-spacing: -0.02em;
+                right: 0px;
+            }
         }
     }
 
     main {
+        width: 272px;
+        height: auto;
+        margin-top: 40px;
+        border: 1px solid $border-color-card;
+        border-radius: 16px;
+        box-shadow: 0px 1px 2px 0px #1018280D;
+        opacity: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include respond-to('large') {
+            width: 450px;
+            height: auto;
+            top: 124px;
+            left: 495px;
+            border-radius: 16px;
+            opacity: 0px;
+        }
+
         section {
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-
             h2 {
-                font-size: 1.125rem;
-                font-weight: 500;
-                margin-bottom: 10px;
+                font-family: Inter Tight, sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 19.36px;
+                letter-spacing: -0.02em;
+                text-align: left;
+                color: $text-color-title;
                 text-align: center;
+            }
 
-                @include respond-to('medium') {
-                    font-size: 1.25rem;
-                }
+            .title-section-today{
+                margin-top: 32px;
+                margin-bottom: 24px;
+            }
+
+            .title-section-completed{
+                margin-bottom: 24px;
+            }
+
+            .task-text{
+                cursor: url('/image/Cursors.png') 10 10, auto;
+                font-family: Inter Tight, sans-serif;
             }
 
             .task {
+                width: 208px;
                 display: flex;
                 align-items: center;
-                padding: 10px;
                 border: 1px dashed $border-color;
-                margin-bottom: 10px;
-                font-size: 0.9rem;
-                cursor: pointer;
+                border-radius: 8px;
+                font-size: 16px;
+                cursor: url('/image/Cursors.png') 10 10, auto;
+                margin-bottom: 8px;
+                padding: 16px;
 
-                @include respond-to('small') {
-                    min-width: 80%;
-                    font-size: 0.8rem;
+                &:hover {
+                    background-color: #F7F9FD;
+                    border-width: 0px 0px 1px 0px;
+                    cursor: url('/image/Cursors.png') 10 10, auto;
                 }
-
-                @include respond-to('medium') {
-                    min-width: 60%;
-                    font-size: 1rem;
-                }
-
                 @include respond-to('large') {
-                    min-width: 40%;
-                    margin: 1rem auto;
+                    width: 386px;
+                    height: 56px;
+                    font-size: 19px;
+                    margin-bottom: 24px;
                 }
 
                 input[type="checkbox"] {
-                    margin-right: 10px;
+                    appearance: none;
+                    width: 24px;
+                    height: 24px;
+                    background-color: #FFF;
+                    border: 1px solid $border-color;
+                    border-radius: 4px;
+                    position: relative;
+                    margin-right: 16px;
+                    cursor: url('/image/Cursors.png') 10 10, auto;
+                    
+                    &:checked {
+                        background-color: #A0DCF6;
+                        border-color: #0796D3;
+                    }
+        
+                    &:checked::after {
+                        content: url('/image/Icon.png');
+                        position: absolute;
+                        top: 4px;
+                        left: 4px;
+                        border-color: #005B7F;
+                    }
                 }
 
                 &.completed {
                     text-decoration: line-through;
                     color: $completed-color;
+                    margin-bottom: 24px;
                 }
 
-                .new-tag {
-                    margin-left: 10px;
-                    background-color: $new-tag-color;
-                    color: white;
-                    padding: 2px 5px;
-                    border-radius: 3px;
-                    font-size: 0.75rem;
-                    font-weight: 500;
-                }
+                // .new-tag {
+                //     margin-left: 10px;
+                //     background-color: $new-tag-color;
+                //     color: white;
+                //     padding: 2px 5px;
+                //     border-radius: 3px;
+                //     font-size: 10px;
+                //     font-weight: bold;
+                // }
 
                 .delete-task {
                     background: none;
+                    width: 24px;
+                    height: 24px;
                     color: $trash-icon-color;
                     border: none;
-                    cursor: pointer;
-                    padding: 5px;
+                    cursor: url('/image/Cursors.png') 10 10, auto;
                     margin-left: auto;
                     opacity: 0.5;
                     transition: opacity 0.3s ease;
 
                     &:hover {
                         opacity: 1;
-                        cursor: pointer;
+                        cursor: url('/image/Cursors.png') 10 10, auto;
                     }
 
                     svg {
-                        width: 18px;
-                        height: 18px;
+                        width: 24px;
+                        height: 24px;
                     }
-                }
-
-                // Tooltip styles
-                .tooltip {
-                    position: absolute;
-                    background-color: #333;
-                    color: #fff;
-                    padding: 5px 10px;
-                    border-radius: 4px;
-                    font-size: 12px;
-                    z-index: 1000;
-                    white-space: nowrap;
-                    visibility: hidden; // Hidden by default
-                    opacity: 0;
-                    transition: opacity 0.2s ease-in-out;
-                }
-
-                &:hover .tooltip {
-                    visibility: visible; // Show on hover
-                    opacity: 1;
                 }
             }
         }
     }
 
     .add-task-container {
-        @include flex-center; // Usa o mixin flex-center para centralização
-        width: 100%; // Ocupa toda a largura disponível
-        margin: 1rem auto; // Margem para espaçamento
+        @include flex-center;
+        width: 272px;
+        height: 51px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+
+        @include respond-to('large') {
+            width: 450px;
+        }
         .add-task {
             @include button-style;
             width: 100%;
+            height: auto;
             font-size: 1rem;
             background: linear-gradient(90deg, $add-task-gradient-start 0%, $add-task-gradient-end 68.65%);
-            margin: 1rem auto;
+            margin-top: 24px;
+
+            border-radius: 8px;
 
             &:hover {
                 background: linear-gradient(90deg, darken($add-task-gradient-start, 5%) 0%, darken($add-task-gradient-end, 5%) 68.65%);
-            }
-
-            @include respond-to('small') {
-                font-size: 0.9rem;
-                width: 90%;
-            }
-        
-            @include respond-to('medium') {
-                font-size: 1rem;
-                width: 80%;
+                cursor: url('/image/Cursors.png') 10 10, auto;
             }
         
             @include respond-to('large') {
-                font-size: 1.125rem;
-                width: 60%;
+                width: 450px;
+                height: 51px;
             }
         }
     }
@@ -278,95 +317,156 @@ $breakpoints: (
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(255, 255, 255, 0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-    }
-
-    .modal {
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        width: 90%;
-        max-width: 400px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
-        @include respond-to('small') {
-            width: 95%;
-        }
-
-        @include respond-to('medium') {
-            width: 90%;
-        }
+        background-color: rgba(255, 255, 255);
 
         @include respond-to('large') {
-            width: 400px; // ou ajuste conforme necessário
-        }
-
-        h2 {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        .modal-content {
-            margin-bottom: 20px;
-
-            label {
-                display: block;
-                margin-bottom: 5px;
-                font-weight: 500;
-            }
-
-            input {
-                width: 100%;
-                padding: 8px;
-                border: 1px solid $border-color;
-                border-radius: 4px;
-                font-size: 1rem;
-                font-family: $font-family;
-
-                &:focus {
-                    outline: none;
-                    border-color: $primary-color;
-                }
-            }
-        }
-
-        .modal-actions {
+            position: fixed;
+            background-color: rgba(255, 255, 255, 0.8);
             display: flex;
-            justify-content: flex-end;
-            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
 
-            button {
-                padding: 8px 16px;
-                border: none;
-                border-radius: 4px;
-                font-size: 1rem;
-                font-family: $font-family;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
+        .modal {
+            font-family: Inter Tight, sans-serif;
+            background-color: white;
+            max-width: 320px;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+    
+            @include respond-to('large') {
+                font-family: Inter Tight, sans-serif;
+                background-color: white;
+                min-width: 450px;
+                max-height: 286px;
+                border-radius: 16px;
+                box-shadow: 0px 24px 48px #1018282E;
+            }
+    
+            h2 {
+                width: 272px;
+                font-size: 24px;
+                font-weight: 500;
+                line-height: 29.04px;
+                letter-spacing: -0.02em;
+                text-align: left;
+                margin-top: 54px;
+                font-family: Inter Tight, sans-serif;
 
-                &.cancel-button {
-                    background-color: $cancel-button-color;
-                    color: $cancel-button-text-color;
-
-                    &:hover {
-                        background-color: darken($cancel-button-color, 5%);
-                    }
+                @include respond-to('large') {
+                    font-family: Inter Tight, sans-serif;
+                    min-width: 386px;
+                    margin-top: 0px;
+                    margin-bottom: 32px;
+                }
+            }
+    
+            .modal-content {
+                width: 272px;
+                margin-bottom: 32px;
+    
+                @include respond-to('large') {
+                    width: 386px;
                 }
 
-                &.add-button {
-                    @include button-style;
-                    background: linear-gradient(90deg, $add-task-gradient-start 0%, $add-task-gradient-end 68.65%);
-                    max-width: 40%;
-                    &:hover {
-                        background: linear-gradient(90deg, darken($add-task-gradient-start, 5%) 0%, darken($add-task-gradient-end, 5%) 68.65%);
+                label {
+                    font-family: Inter Tight, sans-serif;
+                    display: block;
+                    size: 16px;
+                    margin-bottom: 5px;
+                    font-weight: 500;
+                }
+    
+                p {
+                    font-family: Inter Tight, sans-serif;
+                    color: #0000008A;
+                }
+
+                input {
+                    width: 256px;
+                    padding: 8px;
+                    border: 1px solid $border-color;
+                    border-radius: 4px;
+                    font-size: 1rem;
+                    font-family: Inter Tight, sans-serif;
+    
+                    &:focus {
+                        outline: none;
+                        border-color: $primary-color;
+                    }
+
+                    @include respond-to('large') {
+                        width: 370px;
+                    }
+                }
+            }
+    
+            .modal-actions {
+                display: flex;
+                max-width: 272px;
+                flex-direction: column;
+                justify-content: flex-end;
+                gap: 16px;
+                font-family: Inter Tight, sans-serif;
+                
+                @include respond-to('large') {
+                    max-width: 386px;
+                    flex-direction: row-reverse;
+                    font-family: Inter Tight, sans-serif;
+                }
+
+                button {
+                    width: 272px;
+                    padding: 8px 16px;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    font-family: Inter Tight, sans-serif;
+                    transition: background-color 0.3s ease;
+                    
+                    @include respond-to('large') {
+                        width: 185px;
+                        border-radius: 8px;
+                    }
+
+                    &.cancel-button {
+                        background-color: $cancel-button-color;
+                        color: $cancel-button-text-color;
+    
+                        &:hover {
+                            background-color: darken($cancel-button-color, 5%);
+                            cursor: url('/image/Cursors.png') 10 10, auto;
+                        }
+                    }
+    
+                    &.add-button {
+                        @include button-style;
+                        background: linear-gradient(90deg, $add-task-gradient-start 0%, $add-task-gradient-end 68.65%);
+                        
+                        &:hover {
+                            background: linear-gradient(90deg, darken($add-task-gradient-start, 5%) 0%, darken($add-task-gradient-end, 5%) 68.65%);
+                            cursor: url('/image/Cursors.png') 10 10, auto;
+                        }
+                    }
+                    &.delete-button {
+                        @include button-style;
+                        background: linear-gradient(90deg, $delete-task-gradient-start 0%, $delete-task-gradient-end 68.65%);
+                        border-radius: 8px;
+                        
+                        &:hover {
+                            background: linear-gradient(90deg, darken($delete-task-gradient-start, 5%) 0%, darken($delete-task-gradient-end, 5%) 68.65%);
+                            cursor: url('/image/Cursors.png') 10 10, auto;
+                        }
                     }
                 }
             }
         }
+
     }
+
+    
 }

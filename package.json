@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "start-server": "node src/server.js",
+    "start:server": "node src/server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

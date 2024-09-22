@@ -3,6 +3,7 @@ import LogoSvg from "@/app/components/logo-svg";
 import '@/app/style/task-manager.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import TaskCard from "../components/task-card";
 
 interface Task {
   id: number;
@@ -25,12 +26,6 @@ export default function TaskManager() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
-  const [tooltip, setTooltip] = useState<Tooltip>({
-    visible: false,
-    text: '',
-    x: 0,
-    y: 0,
-  });
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -47,7 +42,6 @@ export default function TaskManager() {
 
     setTasks(updatedTasks);
 
-    // Atualiza o backend
     const taskToUpdate = updatedTasks.find(task => task.id === id);
     if (taskToUpdate) {
       await axios.put(`http://localhost:3001/api/tasks/${id}`, taskToUpdate);
@@ -103,60 +97,31 @@ export default function TaskManager() {
   return (
     <div className="task-manager">
       <header>
-        <LogoSvg className="logo" />
-        <h1>Bem-vindo de volta, Marcus</h1>
-        <div className="date">
-          {new Date().toLocaleDateString('pt-BR', {
-            weekday: 'long',
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
-          })}
-        </div>
+          <LogoSvg className="logo" />
+          <h1>Bem-vindo de volta, Marcus</h1>
+          <div className="date">
+            {new Date().toLocaleDateString('pt-BR', {
+              weekday: 'long',
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric'
+            })}
+          </div>
       </header>
       <main>
-        <section>
-          <h2 className="title-section">Suas tarefas de hoje</h2>
+        <section className="section-task-today">
+          <h2 className="title-section-today">Suas tarefas de hoje</h2>
           {tasks.filter(task => !task.completed).map(task => (
-            <div 
-              key={task.id} 
-              className="task"
-              onMouseEnter={() => {
-                const tooltipText = `Criada em: ${new Date(task.createdAt).toLocaleString()}`;
-                setTooltip({ visible: true, text: tooltipText, x: 0, y: 0 });
-              }}
-              onMouseMove={(e) => {
-                const tooltipX = e.clientX + 10;
-                const tooltipY = e.clientY + 10;
-                setTooltip(prevTooltip => ({ ...prevTooltip, x: tooltipX, y: tooltipY }));
-              }}
-              onMouseLeave={() => setTooltip(prev => ({ ...prev, visible: false }))}
-            >
-              <input 
-                type="checkbox" 
-                checked={task.completed} 
-                onChange={() => toggleTask(task.id)} 
-                id={`task-${task.id}`}
-              />
-              <label htmlFor={`task-${task.id}`}>{task.text}</label>
-              {task.isNew && <span className="new-tag">NOVO!</span>}
-              <button 
-                onClick={() => openDeleteModal(task)}
-                className="delete-task"
-                aria-label={`Excluir tarefa: ${task.text}`}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                </svg>
-              </button>
-            </div>
+            <TaskCard
+              key={task.id}
+              task={task}
+              toggleTask={toggleTask}
+              openDeleteModal={openDeleteModal}
+            />
           ))}
         </section>
-        <section>
-          <h2 className="title-section">Tarefas finalizadas</h2>
+        <section className="section-task-completed">
+          <h2 className="title-section-completed">Tarefas finalizadas</h2>
           {tasks.filter(task => task.completed).map(task => (
             <div key={task.id} className="task completed">
               <input 
@@ -165,26 +130,23 @@ export default function TaskManager() {
                 onChange={() => toggleTask(task.id)} 
                 id={`task-${task.id}`}
               />
-              <label htmlFor={`task-${task.id}`}>{task.text}</label>
+              <label className="task-text" htmlFor={`task-${task.id}`}>{task.text}</label>
               <button 
                 onClick={() => openDeleteModal(task)}
                 className="delete-task"
                 aria-label={`Excluir tarefa: ${task.text}`}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M1 5H3M3 5H19M3 5V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H15C15.5304 21 16.0391 20.7893 16.4142 20.4142C16.7893 20.0391 17 19.5304 17 19V5H3ZM6 5V3C6 2.46957 6.21071 1.96086 6.58579 1.58579C6.96086 1.21071 7.46957 1 8 1H12C12.5304 1 13.0391 1.21071 13.4142 1.58579C13.7893 1.96086 14 2.46957 14 3V5" stroke="#B0BBD1" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
             </div>
           ))}
         </section>
-        <div className="add-task-container">
-            <button onClick={openAddModal} className="add-task">Adicionar nova tarefa</button>
-        </div>
       </main>
+      <div className="add-task-container">
+            <button onClick={openAddModal} className="add-task">Adicionar nova tarefa</button>
+      </div>
 
       {isAddModalOpen && (
         <div className="modal-overlay">
@@ -197,12 +159,12 @@ export default function TaskManager() {
                 id="new-task-title"
                 value={newTaskTitle}
                 onChange={(e) => setNewTaskTitle(e.target.value)}
-                placeholder="Digite o título da tarefa"
+                placeholder="Digite"
               />
             </div>
             <div className="modal-actions">
-              <button onClick={closeAddModal} className="cancel-button">Cancelar</button>
               <button onClick={addTask} className="add-button">Adicionar</button>
+              <button onClick={closeAddModal} className="cancel-button">Cancelar</button>
             </div>
           </div>
         </div>
@@ -210,22 +172,16 @@ export default function TaskManager() {
 
       {isDeleteModalOpen && taskToDelete && (
         <div className="modal-overlay">
-          <div className="modal">
+          <div className="modal" style={{ height: '232px' }}>
             <h2>Deletar tarefa</h2>
             <div className="modal-content">
-              <p>Tem certeza que você deseja deletar a tarefa: {taskToDelete.text}?</p>
+              <p style={{ margin: '0px' }}>Tem certeza que você deseja deletar essa tarefa?</p>
             </div>
             <div className="modal-actions">
-              <button onClick={closeDeleteModal} className="cancel-button">Cancelar</button>
               <button onClick={deleteTask} className="delete-button">Deletar</button>
+              <button onClick={closeDeleteModal} className="cancel-button">Cancelar</button>
             </div>
           </div>
-        </div>
-      )}
-
-      {tooltip.visible && (
-        <div className="tooltip" style={{ left: tooltip.x, top: tooltip.y }}>
-          {tooltip.text}
         </div>
       )}
     </div>
