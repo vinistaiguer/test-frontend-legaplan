@@ -13,13 +13,6 @@ interface Task {
   createdAt: Date;
 }
 
-interface Tooltip {
-  visible: boolean;
-  text: string;
-  x: number;
-  y: number;
-}
-
 export default function TaskManager() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
