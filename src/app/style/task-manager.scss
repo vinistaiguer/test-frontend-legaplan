@@ -74,6 +74,7 @@ $breakpoints: (
     align-items: center;
     overflow: auto;
     scrollbar-width: none;
+    z-index: 1000;
     :-webkit-scrollbar {
         display: none;
     }
