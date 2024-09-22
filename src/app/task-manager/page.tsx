@@ -21,7 +21,7 @@ export default function TaskManager() {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const response = await axios.get('http://localhost:3001/api/tasks');
+      const response = await axios.get('https://test-backend-legaplan.onrender.com/api/tasks');
       setTasks(response.data);
     };
     fetchTasks();
@@ -36,7 +36,7 @@ export default function TaskManager() {
 
     const taskToUpdate = updatedTasks.find(task => task.id === id);
     if (taskToUpdate) {
-      await axios.put(`http://localhost:3001/api/tasks/${id}`, taskToUpdate);
+      await axios.put(`https://test-backend-legaplan.onrender.com/api/tasks/${id}`, taskToUpdate);
     }
   };
 
@@ -58,7 +58,7 @@ export default function TaskManager() {
         isNew: true,
         createdAt: new Date().toISOString()
       };
-      const response = await axios.post('http://localhost:3001/api/tasks', newTask);
+      const response = await axios.post('https://test-backend-legaplan.onrender.com/api/tasks', newTask);
       setTasks([...tasks, response.data]);
       closeAddModal();
     }
@@ -77,7 +77,7 @@ export default function TaskManager() {
   const deleteTask = async () => {
     try {
       if (taskToDelete) {
-        await axios.delete(`http://localhost:3001/api/tasks/${taskToDelete.id}`);
+        await axios.delete(`https://test-backend-legaplan.onrender.com/api/tasks/${taskToDelete.id}`);
         setTasks(tasks.filter(task => task.id !== taskToDelete.id));
         closeDeleteModal();
       }
