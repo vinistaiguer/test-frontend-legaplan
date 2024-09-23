@@ -1,39 +1,32 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "text": "Lavar as mãos",
+      "id": "2429e1ca-2d1f-47bf-9a53-90931449a983",
+      "text": "Lavar a mão",
       "completed": false,
       "isNew": true,
-      "createdAt": "2024-09-22T17:25:56.288Z"
+      "createdAt": "2024-09-23T00:31:19.433Z"
     },
     {
-      "id": 2,
-      "text": "Fazer um bolo",
+      "id": "6cc5c0c4-6bbe-4fe1-8ac5-68d6f97433ed",
+      "text": "Fazer bolo",
       "completed": false,
       "isNew": true,
-      "createdAt": "2024-09-22T17:26:11.841Z"
+      "createdAt": "2024-09-23T00:31:31.827Z"
     },
     {
-      "id": 3,
+      "id": "d7465899-b542-4dd8-bd8e-0199b4653ca2",
       "text": "Lavar a louça",
       "completed": false,
       "isNew": true,
-      "createdAt": "2024-09-22T17:26:17.301Z"
+      "createdAt": "2024-09-23T00:31:45.055Z"
     },
     {
-      "id": 4,
+      "id": "e66230f7-60c3-4823-998f-a00805d9c6ae",
       "text": "Levar o lixo para fora",
       "completed": true,
       "isNew": true,
-      "createdAt": "2024-09-22T17:26:22.217Z"
-    },
-    {
-      "id": 5,
-      "text": "teste",
-      "completed": false,
-      "isNew": true,
-      "createdAt": "2024-09-22T20:12:30.287Z"
+      "createdAt": "2024-09-23T00:32:03.200Z"
     }
   ]
 }
