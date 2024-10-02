@@ -39,10 +39,6 @@ Firestore is an excellent choice for persisting real-time data, especially in ap
 
 In the model I am sharing, it is a basic example of how to persist data in Firestore, whether to add, update, delete, or query documents.
 
-#### Benefits:
-
-Test application functionalities without a real backend.
-Provide simulated data quickly and efficiently. The server.js file is configured to initialize the JSON Server, allowing your Next.js application to interact with it as if it were a real API.
 
 ### 🤝 Contribution
 Feel free to contribute! Send your suggestions or corrections via pull requests.
