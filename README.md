@@ -28,18 +28,16 @@ Builds the application in development mode.
 Starts a local server, usually accessible at http://localhost:3000.
 Enables Hot Module Replacement (HMR), allowing changes to be reflected immediately in the browser.
 
-### 2. JSON Server:
-```bash
-npm run start:server
-```
+### 2. FIRESTORE:
+I am using Firestore to persist data.
+
 #### Description:
 
-Starts a Node.js server that runs the src/server.js file.
+Firestore is an excellent choice for persisting real-time data, especially in applications that require scalability and efficient synchronization between devices.
 
 #### Why use it:
 
-This command is used to run the JSON Server, allowing you to simulate a RESTful API during development.
-starts a local server, usually accessible at http://localhost:3001
+In the model I am sharing, it is a basic example of how to persist data in Firestore, whether to add, update, delete, or query documents.
 
 #### Benefits:
 
